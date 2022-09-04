@@ -36,6 +36,7 @@ export const getAllEventos = async (req, res) =>{
         "FH_INICIO"  : "2022-09-05T03:10:45+0000", 
         "FH_FIN"     : "2022-09-05T05:10:45+0000", 
         "URL_EVNT"   : "AA",
+        "URL_FOTO"   : null, 
         "FG_VIG"     : "0"
     }
  */
@@ -50,6 +51,7 @@ export const createEvento = async (req, res) => {
             FH_INICIO, 
             FH_FIN,
             URL_EVNT,
+            URL_FOTO,
             FG_VIG} = req.body;
 
         const newEvento = await Eventos.create({
@@ -61,7 +63,8 @@ export const createEvento = async (req, res) => {
             FH_INICIO  : FH_INICIO,
             FH_FIN     : FH_FIN,
             URL_EVNT   : URL_EVNT,
-            FG_VIG     : FG_VIG
+            FG_VIG     : FG_VIG,
+            URL_FOTO   : URL_FOTO
         })
         res.json(newEvento);
     } catch (error) {
@@ -112,6 +115,7 @@ export const updateEvento = async (req,res) => {
             FH_INICIO, 
             FH_FIN, 
             URL_EVNT,
+            URL_FOTO,
             FG_VIG} = req.body;
 
         const evento = await Eventos.findByPk(id);
@@ -124,6 +128,7 @@ export const updateEvento = async (req,res) => {
         evento.FH_INICIO  = FH_INICIO;
         evento.FH_FIN     = FH_FIN;
         evento.URL_EVNT   = URL_EVNT;
+        evento.URL_FOTO   = URL_FOTO;
         evento.FG_VIG     = FG_VIG; 
 
         //para guardar las modificaciones al objeto en la base de datos
