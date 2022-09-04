@@ -9,7 +9,7 @@ async function main() {
         await sequelize.sync({force: false});
         
         const queryInterface = sequelize.getQueryInterface();
-        queryInterface.addColumn('EVENTOS', 'URL_FOTO', { type: DataTypes.STRING , allowNull: true});
+        //queryInterface.addColumn('EVENTOS', 'URL_FOTO', { type: DataTypes.STRING , allowNull: true});
         
         console.log("Conexión realizada con éxito")
         var PORT = process.env.PORT || 4000;
