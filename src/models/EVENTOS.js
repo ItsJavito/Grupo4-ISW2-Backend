@@ -26,7 +26,7 @@ export default class EVENTOS extends Model {
       type: DataTypes.STRING(400),
       allowNull: true
     },
-    FT_EVNT: {
+    UBIC: {
       type: DataTypes.STRING,
       allowNull: true
     },
