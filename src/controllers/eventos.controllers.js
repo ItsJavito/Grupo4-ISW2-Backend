@@ -2,7 +2,7 @@ import { Eventos } from "../models/modelos.js";
 
 /**
  * getAllEventos
- * * Controlador para traer todos los eventos de la base de datos
+ * * Controlador para traer y registrar todos los eventos de la base de datos
  * @param {request object} req 
  * @param {response object} res 
  * @returns 
