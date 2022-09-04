@@ -45,6 +45,10 @@ export default class EVENTOS extends Model {
     FG_VIG: {
       type: DataTypes.BOOLEAN,
       allowNull: false
+    },
+    URL_FOTO: {
+      type: DataTypes.STRING,
+      allowNull: true
     }
   }, {
     sequelize,
