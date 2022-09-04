@@ -24,6 +24,20 @@ export const getAllEventos = async (req, res) =>{
  * @param {request Object} req 
  * @param {response Object} res 
  * @returns 
+ * 
+ *
+ * !Ejemplo de POST para usar en la API 
+    {
+        "NO_EVNT"    : "Evento 1",
+        "QT_PERS"    : 10,
+        "QT_HRS"     : 2,
+        "DESC_EVENT" : "Descripción de evento",
+        "UBIC"       : "Ubicación de evento",
+        "FH_INICIO"  : "2022-09-05T03:10:45+0000", 
+        "FH_FIN"     : "2022-09-05T05:10:45+0000", 
+        "URL_EVNT"   : "AA",
+        "FG_VIG"     : "0"
+    }
  */
 export const createEvento = async (req, res) => {
     try {
@@ -34,6 +48,7 @@ export const createEvento = async (req, res) => {
             DESC_EVENT, 
             UBIC, 
             FH_INICIO, 
+            FH_FIN,
             URL_EVNT,
             FG_VIG} = req.body;
 
@@ -42,8 +57,9 @@ export const createEvento = async (req, res) => {
             QT_PERS    : QT_PERS,
             QT_HRS     : QT_HRS,
             DESC_EVENT : DESC_EVENT,
-            UBIC       : UBIC,  
-            FH_INICIO  : FH_INICIO, 
+            UBIC       : UBIC,
+            FH_INICIO  : FH_INICIO,
+            FH_FIN     : FH_FIN,
             URL_EVNT   : URL_EVNT,
             FG_VIG     : FG_VIG
         })
@@ -94,6 +110,7 @@ export const updateEvento = async (req,res) => {
             DESC_EVENT, 
             UBIC, 
             FH_INICIO, 
+            FH_FIN, 
             URL_EVNT,
             FG_VIG} = req.body;
 
@@ -105,6 +122,7 @@ export const updateEvento = async (req,res) => {
         evento.DESC_EVENT = DESC_EVENT;
         evento.UBIC       = UBIC;
         evento.FH_INICIO  = FH_INICIO;
+        evento.FH_FIN     = FH_FIN;
         evento.URL_EVNT   = URL_EVNT;
         evento.FG_VIG     = FG_VIG; 
 
