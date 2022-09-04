@@ -5,7 +5,7 @@ import { sequelize } from './database/database.js'
 async function main() {
     try {
         InicializarModelos();
-        await sequelize.sync({force: true});
+        await sequelize.sync({force: false});
         console.log("Conexión realizada con éxito")
         var PORT = process.env.PORT || 4000;
         app.listen(PORT);
