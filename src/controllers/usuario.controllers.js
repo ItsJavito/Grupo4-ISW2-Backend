@@ -34,7 +34,7 @@ export const getUsuario = async (req, res) => {
 export const createUsuario = async (req, res) => {
     try {
         const {
-            CO_USR, 
+           
             NOM_USR, 
             CORREO, 
             CONTRA, 
@@ -45,7 +45,7 @@ export const createUsuario = async (req, res) => {
             FH_CREACION }= req.body;
 
         const newUsuario = await Usuarios.create({
-            CO_USR     :  CO_USR,
+            
             NOM_USR    :  NOM_USR, 
             CORREO     :  CORREO,
             CONTRA     :  CONTRA,
@@ -65,8 +65,7 @@ export const createUsuario = async (req, res) => {
 export const updateUsuario = async (req, res) => {
     try {
         const {id} = req.params;
-        const {
-            CO_USR, 
+        const { 
             NOM_USR, 
             CORREO, 
             CONTRA, 
@@ -78,7 +77,7 @@ export const updateUsuario = async (req, res) => {
 
         const usuario = await Usuarios.findByPK(id);
         
-            usuario.CO_USR     =  CO_USR;
+            
             usuario.NOM_USR    =  NOM_USR; 
             usuario.CORREO     =  CORREO;
             usuario.CONTRA     =  CONTRA;
@@ -89,7 +88,7 @@ export const updateUsuario = async (req, res) => {
             usuario.FH_CREACION=  FH_CREACION;
         
         await usuario.save();
-        res.json({message: "Evento actualizado"});
+        res.json({message: "Usuario actualizado"});
     } catch (error) {
         return res.status(500).json({message : error.message});
     }
