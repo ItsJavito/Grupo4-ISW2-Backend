@@ -26,14 +26,6 @@ export default class USUARIOS extends Model {
       type: DataTypes.STRING(255),
       allowNull: true
     },
-    AP_PAT: {
-      type: DataTypes.STRING(255),
-      allowNull: true
-    },
-    AP_MAT: {
-      type: DataTypes.STRING(255),
-      allowNull: true
-    },
     FH_NACIMIENTO: {
       type: DataTypes.DATEONLY,
       allowNull: false

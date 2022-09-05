@@ -6,9 +6,9 @@ import { sequelize } from './database/database.js'
 async function main() {
     try {
         InicializarModelos();
-        await sequelize.sync({force: false});
+        await sequelize.sync({force: true});
         
-        const queryInterface = sequelize.getQueryInterface();
+        //const queryInterface = sequelize.getQueryInterface();
         //queryInterface.addColumn('EVENTOS', 'URL_FOTO', { type: DataTypes.STRING , allowNull: true});
         
         console.log("Conexión realizada con éxito")
