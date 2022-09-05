@@ -33,6 +33,10 @@ export default class USUARIOS extends Model {
     PAIS:{
       type: DataTypes.STRING,
       allowNull: false
+    },
+    RUC:{
+      type: DataTypes.INTEGER(11),
+      allowNull: false
     }
   }, {
     sequelize,
