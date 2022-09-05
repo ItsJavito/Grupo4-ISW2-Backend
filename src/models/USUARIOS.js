@@ -29,6 +29,10 @@ export default class USUARIOS extends Model {
     FH_CREACION: {
       type: DataTypes.DATE,
       allowNull: false
+    },
+    PAIS:{
+      type: DataTypes.STRING,
+      allowNull: false
     }
   }, {
     sequelize,
