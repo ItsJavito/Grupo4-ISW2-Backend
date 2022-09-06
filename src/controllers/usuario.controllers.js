@@ -1,4 +1,5 @@
 import {Usuarios} from "../models/modelos.js";
+import USUARIOS from "../models/USUARIOS.js";
 
 /*Controlador para get todos los usuarios*/
 export const getAllUsuarios = async (req, res) =>{
@@ -34,15 +35,13 @@ export const getUsuario = async (req, res) => {
 export const createUsuario = async (req, res) => {
     try {
         const {
-           
             NOM_USR, 
             CORREO, 
             CONTRA, 
             NOM, 
-            AP_PAT,
-            AP_MAT,
-            FH_NACIMIENTO,
-            FH_CREACION }= req.body;
+            FH_CREACION,
+            PAIS,
+            RUC}= req.body;
 
         const newUsuario = await Usuarios.create({
             
@@ -50,10 +49,9 @@ export const createUsuario = async (req, res) => {
             CORREO     :  CORREO,
             CONTRA     :  CONTRA,
             NOM        :  NOM, 
-            AP_PAT     :  AP_PAT,
-            AP_MAT     :  AP_MAT,
-            FH_NACIMIENTO:FH_NACIMIENTO,
-            FH_CREACION:  FH_CREACION
+            FH_CREACION:  FH_CREACION,
+            PAIS       :  PAIS,
+            RUC        :  RUC
         })
         res.json(newUsuario);
     } catch (error) {
@@ -70,10 +68,9 @@ export const updateUsuario = async (req, res) => {
             CORREO, 
             CONTRA, 
             NOM, 
-            AP_PAT,
-            AP_MAT,
-            FH_NACIMIENTO,
-            FH_CREACION }= req.body;
+            FH_CREACION,
+            PAIS,
+            RUC }= req.body;
 
         const usuario = await Usuarios.findByPK(id);
         
@@ -82,10 +79,9 @@ export const updateUsuario = async (req, res) => {
             usuario.CORREO     =  CORREO;
             usuario.CONTRA     =  CONTRA;
             usuario.NOM        =  NOM; 
-            usuario.AP_PAT     =  AP_PAT;
-            usuario.AP_MAT     =  AP_MAT;
-            usuario.FH_NACIMIENTO=FH_NACIMIENTO;
             usuario.FH_CREACION=  FH_CREACION;
+            usuario.PAIS       =  PAIS;
+            usuario.RUC        =  RUC;
         
         await usuario.save();
         res.json({message: "Usuario actualizado"});
