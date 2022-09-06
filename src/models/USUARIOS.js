@@ -10,7 +10,7 @@ export default class USUARIOS extends Model {
       allowNull: false,
       primaryKey: true
     },
-    NOM_USR: {
+    NOM_USR:{
       type: DataTypes.STRING,
       allowNull: false
     },
@@ -26,20 +26,16 @@ export default class USUARIOS extends Model {
       type: DataTypes.STRING(255),
       allowNull: true
     },
-    AP_PAT: {
-      type: DataTypes.STRING(255),
-      allowNull: true
-    },
-    AP_MAT: {
-      type: DataTypes.STRING(255),
-      allowNull: true
-    },
-    FH_NACIMIENTO: {
-      type: DataTypes.DATEONLY,
-      allowNull: false
-    },
     FH_CREACION: {
       type: DataTypes.DATE,
+      allowNull: false
+    },
+    PAIS:{
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    RUC:{
+      type: DataTypes.INTEGER(11),
       allowNull: false
     }
   }, {
