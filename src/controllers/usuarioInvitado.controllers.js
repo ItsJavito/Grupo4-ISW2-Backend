@@ -1,4 +1,4 @@
-import { UsuarioInvitado } from "../models/modelos";
+import { UsuarioInvitado } from "../models/modelos.js";
 /**
  * getAllUsuarioInvitado
  * * Controlador para traer todos los usuarioInvitado de la base de datos
