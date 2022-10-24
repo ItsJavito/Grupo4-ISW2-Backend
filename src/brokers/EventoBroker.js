@@ -1,27 +1,23 @@
-import EVENTOS from "../models/EVENTOS";
+import EVENTOS from "../models/EVENTOS.js";
+import {RelationalBroker} from "./RelationalBroker.js";
 
-/*
- TODO: UsuarioBroker, implementar el singletone y las funciones del broker
- */
 export class EventoBroker extends RelationalBroker{
 
-    Eventos;                    //modelo de tabla eventos
-    singletonInstance = null;   //singletone instancia
+    Eventos = null;                    //modelo de tabla eventos
+    static singletonInstance = null;   //singletone instancia
 
-    constructor(Eventos){
-        if(this.Eventos instanceof EVENTOS){
-            this.Eventos = Eventos; 
-        }else{
-            throw console.error("No se puede crear el objeto : EventoBroker");
-        }
+    constructor(eventos){
+        super();
+        console.log(typeof eventos)
+        this.Eventos = eventos; 
     }
 
-    static getInstance(Eventos){
-        if(singletonInstance === null){
-            singletonInstance = new EventoBroker(Eventos);
-            return singletonInstance;
+    static getInstance(eventos){
+        if(this.singletonInstance === null){
+            this.singletonInstance = new EventoBroker(eventos);
+            return this.singletonInstance;
         }else{
-            return singletonInstance; 
+            return this.singletonInstance; 
         }
     }
 
@@ -36,7 +32,7 @@ export class EventoBroker extends RelationalBroker{
      */
     getAllEventos = async (req, res) =>{
         try {
-            const eventos = await Eventos.findAll();
+            const eventos = await this.Eventos.findAll();
             console.log(eventos)
             res.json(eventos);
         } catch (error) {
@@ -47,7 +43,7 @@ export class EventoBroker extends RelationalBroker{
     getEvento = async (req, res) => {
         try {
             const {id} = req.params;
-            const evento = await Eventos.findOne({
+            const evento = await this.Eventos.findOne({
                 where: {
                     NU_EVNT : id
                 }
@@ -76,7 +72,7 @@ export class EventoBroker extends RelationalBroker{
                 URL_FOTO,
                 FG_VIG} = req.body;
 
-            const newEvento = await Eventos.create({
+            const newEvento = await this.Eventos.create({
                 NO_EVNT    : NO_EVNT,
                 QT_PERS    : QT_PERS,
                 QT_HRS     : QT_HRS,
@@ -110,7 +106,7 @@ export class EventoBroker extends RelationalBroker{
                 URL_FOTO,
                 FG_VIG} = req.body;
     
-            const evento = await Eventos.findByPk(id);
+            const evento = await this.Eventos.findByPk(id);
     
             evento.NO_EVNT    = NO_EVNT;
             evento.QT_PERS    = QT_PERS;
@@ -135,7 +131,7 @@ export class EventoBroker extends RelationalBroker{
     deleteEvento = async (req,res) => {
         try {
             const {id} = req.params;
-            await Eventos.destroy({
+            await this.Eventos.destroy({
                 where: {
                     NU_EVNT : id
                 }

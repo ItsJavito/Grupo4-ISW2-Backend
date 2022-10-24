@@ -1,6 +1,6 @@
-import USUARIOS from "../models/USUARIOS";
-import USUARIO_INVITADO from "../models/USUARIO_INVITADO";
-import { RelationalBroker } from "./RelationalBroker";
+import USUARIOS from "../models/USUARIOS.js";
+import USUARIO_INVITADO from "../models/USUARIO_INVITADO.js";
+import {RelationalBroker} from "./RelationalBroker.js";
 
 /*
  TODO: UsuarioBroker las funciones del broker
@@ -9,22 +9,19 @@ export class UsuarioBroker extends RelationalBroker{
 
     Usuarios;               //modelo de tabla usuarios
     Usuario_invitado;       //modelo de tablas usuario_invitado
-    singletoneInstance = null; //instancia para singletone 
+    static singletoneInstance = null; //instancia para singletone 
     constructor(usuarios, usuario_invitado){
-        if(usuarios instanceof USUARIOS && usuario_invitado instanceof USUARIO_INVITADO){
-            this.Usuarios = usuarios;
-            this.Usuario_invitado = usuario_invitado;
-        }else{
-            throw console.error("No se puede crear el objeto");
-        }
+        super();
+        this.Usuarios = usuarios;
+        this.Usuario_invitado = usuario_invitado
     }
 
     static getInstance(usuarios, usuario_invitado){
-        if(singletoneInstance === null){
-            singletoneInstance = new UsuarioBroker(usuarios, usuario_invitado);
-            return singletoneInstance;
+        if(this.singletoneInstance === null){
+            this.singletoneInstance = new UsuarioBroker(usuarios, usuario_invitado);
+            return this.singletoneInstance;
         }else{
-            return singletoneInstance; 
+            return this.singletoneInstance; 
         }
     }
     
