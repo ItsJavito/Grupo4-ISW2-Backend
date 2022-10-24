@@ -66,7 +66,7 @@ export const createEvento = async (req, res) => {
             FG_VIG     : FG_VIG,
             URL_FOTO   : URL_FOTO
         })
-        res.json(newEvento);
+        res.status(200).json(newEvento);
     } catch (error) {
         return res.status(500).json({message : error.message});
     }

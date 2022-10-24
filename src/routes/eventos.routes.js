@@ -1,18 +1,16 @@
 import { Router } from "express";
-import { 
-    getAllEventos, 
-    createEvento, 
-    getEvento, 
-    updateEvento, 
-    deleteEvento} 
-from "../controllers/eventos.controllers.js";
+import { EventoBroker } from "../brokers/eventoBroker.js";
+import { Eventos } from "../models/modelos.js";
 
 const router = Router();
+const eventoBroker = EventoBroker.getInstance(Eventos);
 
-router.get("/eventos" , getAllEventos);
-router.get("/eventos/:id" , getEvento);
-router.post("/eventos", createEvento);
-router.put("/eventos/:id", updateEvento);
-router.delete("/eventos/:id", deleteEvento);
+if(eventoBroker instanceof EventoBroker){
+    router.get("/eventos" , eventoBroker.getAllEventos);
+    router.get("/eventos/:id" , eventoBroker.getEvento);
+    router.post("/eventos", eventoBroker.createEvento);
+    router.put("/eventos/:id", eventoBroker.updateEvento);
+    router.delete("/eventos/:id", eventoBroker.deleteEvento);
+}
 
 export default router; 
