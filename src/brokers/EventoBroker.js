@@ -8,11 +8,10 @@ export class EventoBroker extends RelationalBroker{
 
     constructor(eventos){
         super();
-        console.log(typeof eventos)
         this.Eventos = eventos; 
     }
 
-    static getInstance(eventos){
+    static async getInstance(eventos){
         if(this.singletonInstance === null){
             this.singletonInstance = new EventoBroker(eventos);
             return this.singletonInstance;

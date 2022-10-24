@@ -16,7 +16,7 @@ export class UsuarioBroker extends RelationalBroker{
         this.Usuario_invitado = usuario_invitado
     }
 
-    static getInstance(usuarios, usuario_invitado){
+    static async getInstance(usuarios, usuario_invitado){
         if(this.singletoneInstance === null){
             this.singletoneInstance = new UsuarioBroker(usuarios, usuario_invitado);
             return this.singletoneInstance;

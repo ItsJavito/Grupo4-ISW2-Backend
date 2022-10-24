@@ -9,7 +9,7 @@ export var UsuariosInvitadoEventos;
 export var UsuarioInvitado;
 export var Usuarios;
 
-export const InicializarModelos = _ =>{
+export const InicializarModelos = async  _ =>{
     const modelos = initModels(sequelize);
     EstadosUsuario              = modelos.ESTADOS_USUARIO
     EventosUsuarios             = modelos.EVENTOS_USUARIOS;
