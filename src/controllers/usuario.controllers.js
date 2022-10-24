@@ -1,5 +1,4 @@
 import {Usuarios} from "../models/modelos.js";
-import USUARIOS from "../models/USUARIOS.js";
 
 /*Controlador para get todos los usuarios*/
 export const getAllUsuarios = async (req, res) =>{
