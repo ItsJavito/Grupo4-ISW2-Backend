@@ -2,22 +2,14 @@ import { Router } from "express";
 import { UsuarioBroker } from "../brokers/UsuarioBroker.js";
 import { Usuarios , UsuarioInvitado} from "../models/modelos.js";
 
-//instancia de usuario Broker
 const usuarioBroker = await UsuarioBroker.getInstance(Usuarios , UsuarioInvitado);
 const router = Router();
+const route = "/usuario";
 
-
-router.get("/usuario" , usuarioBroker.getAllUsuarios);
-router.get("/usuario/:id" , usuarioBroker.getUsuario);
-router.post("/usuario", usuarioBroker.createUsuario);
-router.put("/usuario/:id", usuarioBroker.updateUsuario);
-router.delete("/usuario/:id", usuarioBroker.deleteUsuario);
-
-router.get("/usuariosI", usuarioBroker.getAllUsuarioI);
-router.get("/usuariosI/:id", usuarioBroker.getUsuarioI);
-router.post("/usuariosI", usuarioBroker.createUsuariosI);
-router.put("/usuariosI/:id", usuarioBroker.updateUsuarioI);
-router.delete("/usuariosI/:id", usuarioBroker.deleteUsuarioI);
-
+router.get( route, usuarioBroker.getAllUsuarios);
+router.get(`${route}/:id` , usuarioBroker.getUsuario);
+router.post(route, usuarioBroker.createUsuario);
+router.put(`${route}/:id`, usuarioBroker.updateUsuario);
+router.delete(`${route}/:id`, usuarioBroker.deleteUsuario);
 
 export default router; 

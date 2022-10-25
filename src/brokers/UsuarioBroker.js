@@ -1,3 +1,4 @@
+import { compileETag } from "express/lib/utils.js";
 import USUARIOS from "../models/USUARIOS.js";
 import USUARIO_INVITADO from "../models/USUARIO_INVITADO.js";
 import {RelationalBroker} from "./RelationalBroker.js";
@@ -8,12 +9,12 @@ import {RelationalBroker} from "./RelationalBroker.js";
 export class UsuarioBroker extends RelationalBroker{
 
     Usuarios;               //modelo de tabla usuarios
-    Usuarioinvitado;       //modelo de tablas usuario_invitado
+    UsuarioInvitado;       //modelo de tablas usuario_invitado
     static singletoneInstance = null; //instancia para singletone 
     constructor(usuarios, usuarioinvitado){
         super();
         this.Usuarios = usuarios;
-        this.Usuarioinvitado = usuarioinvitado
+        this.UsuarioInvitado = usuarioinvitado
     }
 
     //-------------------------------------------
