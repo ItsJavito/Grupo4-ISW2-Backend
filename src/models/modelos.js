@@ -9,8 +9,9 @@ export var UsuariosInvitadoEventos;
 export var UsuarioInvitado;
 export var Usuarios;
 
+
 export const InicializarModelos = async  _ =>{
-    const modelos = initModels(sequelize);
+    const modelos = await initModels(sequelize);
     EstadosUsuario              = modelos.ESTADOS_USUARIO
     EventosUsuarios             = modelos.EVENTOS_USUARIOS;
     Eventos                     = modelos.EVENTOS;

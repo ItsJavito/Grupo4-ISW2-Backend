@@ -3,7 +3,7 @@ import { EventoBroker } from "../brokers/eventoBroker.js";
 import { Eventos } from "../models/modelos.js";
 
 const router = Router();
-const eventoBroker = await EventoBroker.getInstance(Eventos);
+const eventoBroker = await EventoBroker.getInstance(await Eventos);
 
 router.get("/eventos" , eventoBroker.getAllEventos);
 router.get("/eventos/:id" , eventoBroker.getEvento);
