@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { EventoBroker } from "../brokers/EventoBroker.js";
+import { EventoBroker } from "../brokers/eventoBroker.js";
 import { Eventos } from "../models/modelos.js";
 
 const router = Router();

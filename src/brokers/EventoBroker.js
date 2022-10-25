@@ -142,8 +142,4 @@ export class EventoBroker extends RelationalBroker{
         }
         
     }
-    //---------------------------
-    // * USUARIO INVITADO * 
-    //---------------------------
-    
 }
