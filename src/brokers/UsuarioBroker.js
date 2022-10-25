@@ -8,17 +8,21 @@ import {RelationalBroker} from "./RelationalBroker.js";
 export class UsuarioBroker extends RelationalBroker{
 
     Usuarios;               //modelo de tabla usuarios
-    Usuario_invitado;       //modelo de tablas usuario_invitado
+    Usuarioinvitado;       //modelo de tablas usuario_invitado
     static singletoneInstance = null; //instancia para singletone 
-    constructor(usuarios, usuario_invitado){
+    constructor(usuarios, usuarioinvitado){
         super();
         this.Usuarios = usuarios;
-        this.Usuario_invitado = usuario_invitado
+        this.Usuarioinvitado = usuarioinvitado
     }
 
-    static async getInstance(usuarios, usuario_invitado){
+    //-------------------------------------------
+    // USUARIO
+    //------------------------------------------
+
+    static async getInstance(usuarios, usuarioInvitado){
         if(this.singletoneInstance === null){
-            this.singletoneInstance = new UsuarioBroker(usuarios, usuario_invitado);
+            this.singletoneInstance = new UsuarioBroker(usuarios, usuarioInvitado);
             return this.singletoneInstance;
         }else{
             return this.singletoneInstance; 
@@ -29,8 +33,7 @@ export class UsuarioBroker extends RelationalBroker{
 
     getAllUsuarios = async (req, res) => {
         try {
-            const usuarios = await Usuarios.findAll();
-            console.log(usuarios)
+            const usuarios = await this.Usuarios.findAll();
             res.status(200).json(usuarios);
         } catch (error) {
             return res.status(500).json({message : error.message});
@@ -40,7 +43,7 @@ export class UsuarioBroker extends RelationalBroker{
     getUsuario = async (req, res) => {
         try {
             const {id} = req.params;
-            const usuario = await Usuarios.findOne({
+            const usuario = await this.Usuarios.findOne({
                 where: {
                     NU_USR : id
                 }
@@ -65,7 +68,7 @@ export class UsuarioBroker extends RelationalBroker{
                 PAIS,
                 RUC}= req.body;
     
-            const newUsuario = await Usuarios.create({
+            const newUsuario = await this.Usuarios.create({
                 
                 NOM_USR    :  NOM_USR, 
                 CORREO     :  CORREO,
@@ -94,7 +97,7 @@ export class UsuarioBroker extends RelationalBroker{
                 PAIS,
                 RUC }= req.body;
     
-            const usuario = await Usuarios.findByPK(id);
+            const usuario = await this.Usuarios.findByPK(id);
             
                 
                 usuario.NOM_USR    =  NOM_USR; 
@@ -112,7 +115,6 @@ export class UsuarioBroker extends RelationalBroker{
         }
     }
 
-    
     //!DELETE
     deleteUsuario = async (req,res) => {
         try {
@@ -125,6 +127,114 @@ export class UsuarioBroker extends RelationalBroker{
             res.status(200).json({message: "Usuario eliminado"});
         } catch (error) {
             return res.status(500).json({message : error.message})
+        }
+    }
+
+    //-------------------------------------------
+    // USUARIO_INVITADO
+    //------------------------------------------
+    
+    //*GET*
+    getAllUsuarioI = async (req, res)=>{
+        try{
+            const usuariosI= await this.UsuarioInvitado.findAll();
+            res.json(usuariosI)
+        }catch(error){
+            return res.status(500).json({message: error.message})
+        }
+    }
+
+    getUsuarioI = async (req, res)=>{
+        try{
+            const {id}= req.params;
+            const usuarioI = await this.UsuarioInvitado.findOne({
+                where: {
+                    CO_USR_INVT: id
+                }
+            })
+            if (!usuarioI) return res.status(404).json({message: "No existe usuario"});
+            res.json(usuarioI)
+        }catch(error){
+            return res.status(500).json({message: error.message});
+        }
+    }
+
+    deleteUsuarioI = async (req,res) => {
+        try {
+            const {id} = req.params;
+            await this.UsuarioInvitado.destroy({
+                where: {
+                    CO_USR_INVT : id
+                }
+            });
+            res.json({message: "Usuario invitado eliminado"});
+            
+        } catch (error) {
+            return res.status(500).json({message : error.message})
+        }
+        
+    }
+
+    //*PUT* 
+    updateUsuarioI = async (req, res)=>{
+        try {
+            const{id}= req.params;
+            const{
+                NOM_USR,
+                CORREO ,
+                CONTRA ,
+                NOM ,
+                AP_PAT , 
+                AP_MAT , 
+                FH_NACIMIENTO,
+                FH_CREACION
+            }= req.body;
+            const usuarioI= await this.UsuarioInvitado.findByPk(id);
+    
+            usuarioI.NOM_USR = NOM_USR;
+            usuarioI.CORREO = CORREO;
+            usuarioI.CONTRA = CONTRA;
+            usuarioI.NOM = NOM;
+            usuarioI.AP_PAT = AP_PAT;
+            usuarioI.AP_MAT = AP_MAT;
+            usuarioI.FH_NACIMIENTO = FH_NACIMIENTO;
+            usuarioI.FH_CREACION = FH_CREACION;
+        
+            await usuarioI.save();
+            res.json({message: "Usuario invitado actualizado"});
+        }catch (error){
+            return res.status(500).json({message: error.message});
+        }
+    }
+
+    //*POST*
+    createUsuariosI= async (req, res)=>{
+        try{
+            const {
+                NOM_USR,
+                CORREO ,
+                CONTRA ,
+                NOM ,
+                AP_PAT , 
+                AP_MAT , 
+                FH_NACIMIENTO,
+                FH_CREACION
+            }= req.body;
+    
+            const newUsuarioI = await this.UsuarioInvitado.create({
+                NOM_USR: NOM_USR,
+                CORREO: CORREO ,
+                CONTRA: CONTRA ,
+                NOM: NOM ,
+                AP_PAT: AP_PAT , 
+                AP_MAT: AP_MAT , 
+                FH_NACIMIENTO: FH_NACIMIENTO,
+                FH_CREACION: FH_CREACION
+            })
+    
+            res.json(newUsuarioI)
+        }catch (error) {
+            return res.status(500).json({message: error.message})
         }
     }
 

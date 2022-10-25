@@ -1,12 +1,10 @@
 import { DataTypes } from 'sequelize';
-import { InicializarModelos } from './models/modelos.js';
 import { sequelize } from './database/database.js'
 import app from './app.js'
 
-function main() {
+async function main() {
     try {
-        InicializarModelos();
-        sequelize.sync({force: false});
+        await sequelize.sync({force: false});
         
         //const queryInterface = sequelize.getQueryInterface();
         //queryInterface.addColumn('EVENTOS', 'URL_FOTO', { type: DataTypes.STRING , allowNull: true});
