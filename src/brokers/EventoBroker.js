@@ -99,7 +99,7 @@ export class EventoBroker extends RelationalBroker{
         }
     }
 
-
+    
     // !POST
     createEvento = async (req, res) => {
         try {
@@ -128,6 +128,21 @@ export class EventoBroker extends RelationalBroker{
                 URL_FOTO   : URL_FOTO
             })
             res.status(200).json(newEvento);
+        } catch (error) {
+            return res.status(500).json({message : error.message});
+        }
+    }
+    createEventoUsuario = async (req, res) => {
+        try {
+            const {
+                CO_USR, 
+                NU_EVNT} = req.body;
+
+            const newEventoUsuario = await this.EventosUsuarios.create({
+                CO_USR      : CO_USR,
+                NU_EVNT     : NU_EVNT
+            })
+            res.status(200).json(newEventoUsuario);
         } catch (error) {
             return res.status(500).json({message : error.message});
         }
@@ -186,4 +201,6 @@ export class EventoBroker extends RelationalBroker{
         }
         
     }
+
+    
 }

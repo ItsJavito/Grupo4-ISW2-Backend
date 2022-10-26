@@ -12,4 +12,6 @@ router.post(route, usuarioBroker.createUsuario);
 router.put(`${route}/:id`, usuarioBroker.updateUsuario);
 router.delete(`${route}/:id`, usuarioBroker.deleteUsuario);
 
+router.get('/login' , usuarioBroker.loginUsuario)
+
 export default router; 

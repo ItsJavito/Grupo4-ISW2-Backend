@@ -1,6 +1,3 @@
-import { compileETag } from "express/lib/utils.js";
-import USUARIOS from "../models/USUARIOS.js";
-import USUARIO_INVITADO from "../models/USUARIO_INVITADO.js";
 import {RelationalBroker} from "./RelationalBroker.js";
 
 /*
@@ -120,7 +117,7 @@ export class UsuarioBroker extends RelationalBroker{
     deleteUsuario = async (req,res) => {
         try {
             const {id} = req.params;
-            await Usuarios.destroy({
+            await this.Usuarios.destroy({
                 where: {
                     NU_USR : id
                 }
@@ -238,5 +235,38 @@ export class UsuarioBroker extends RelationalBroker{
             return res.status(500).json({message: error.message})
         }
     }
+    ////////////////////////////////////////////////77}
+    loginUsuario = async (req , res) => { 
+        try {
+            const correo = req.query.correo;
+            const contra = req.query.contra; 
+    
+            const usuarioI = await this.UsuarioInvitado.findOne({
+                where : {
+                    CORREO : correo,
+                    CONTRA : contra
+                }
+            })
+    
+            const usuario = await this.Usuarios.findOne({
+                where : {
+                    CORREO : correo, 
+                    CONTRA : contra
+                }
+            })
+            if(usuario){
+                usuario["tipo"] = "entidad"
+                return res.json(usuario)
+            }
+            else if(usuarioI){
+                return res.json(usuarioI)
+            }else{
+                res.status(400).json({message : "No existe el usuario"})
+            }
+            
+        } catch (error) {
+            return res.status(500).json({message : error.message})
+        }
 
+    }
 }
