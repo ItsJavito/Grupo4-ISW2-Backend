@@ -3,17 +3,21 @@ import {RelationalBroker} from "./RelationalBroker.js";
 
 export class EventoBroker extends RelationalBroker{
 
-    Eventos = null;                    //modelo de tabla eventos
-    static singletonInstance = null;   //singletone instancia
+    Eventos                     = null;   //modelo de tabla eventos
+    EventosUsuarios             = null; 
+    UsuariosInvitadoEventos     = null;
+    static singletonInstance    = null;   //singletone instancia
 
-    constructor(eventos){
+    constructor(eventos,eventosUsuarios, usuariosInvitadoEventos){
         super();
         this.Eventos = eventos; 
+        this.EventosUsuarios = eventosUsuarios;
+        this.UsuariosInvitadoEventos = usuariosInvitadoEventos;
     }
 
-    static async getInstance(eventos){
+    static async getInstance(eventos , eventosUsuarios ,usuariosInvitadoEventos ){
         if(this.singletonInstance === null){
-            this.singletonInstance = new EventoBroker(eventos);
+            this.singletonInstance = new EventoBroker(eventos, eventosUsuarios , usuariosInvitadoEventos);
             return this.singletonInstance;
         }else{
             return this.singletonInstance; 
@@ -53,8 +57,48 @@ export class EventoBroker extends RelationalBroker{
         } catch (error) {
             return res.status(500).json({message : error.message});
         }
-        
     }
+
+    getEventosUsuario = async (req, res) => {
+        try {
+            const {id} = req.params;
+            const evento = await this.Eventos.findAll({
+                include:{
+                    model: this.EventosUsuarios,
+                    as: "EVENTOS_USUARIOs",
+                    where:{
+                        CO_USR : id
+                    }
+                }
+            })
+            if (!evento) return res.status(404).json({message : 'No existe Evento'});
+            res.json(evento);
+    
+        } catch (error) {
+            return res.status(500).json({message : error.message});
+        }
+    }
+
+    getEventosUsuarioI = async (req, res) => {
+        try {
+            const {id} = req.params;
+            const evento = await this.Eventos.findAll({
+                include:{
+                    model: this.UsuariosInvitadoEventos,
+                    as: "USUARIO_INVITADO_EVENTOs",
+                    where:{
+                        CO_USR_INVT : id
+                    }
+                }
+            })
+            if (!evento) return res.status(404).json({message : 'No existe Evento'});
+            res.json(evento);
+    
+        } catch (error) {
+            return res.status(500).json({message : error.message});
+        }
+    }
+
 
     // !POST
     createEvento = async (req, res) => {
