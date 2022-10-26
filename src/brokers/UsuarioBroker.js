@@ -220,14 +220,14 @@ export class UsuarioBroker extends RelationalBroker{
             }= req.body;
     
             const newUsuarioI = await this.UsuarioInvitado.create({
-                NOM_USR: NOM_USR,
-                CORREO: CORREO ,
-                CONTRA: CONTRA ,
-                NOM: NOM ,
-                AP_PAT: AP_PAT , 
-                AP_MAT: AP_MAT , 
-                FH_NACIMIENTO: FH_NACIMIENTO,
-                FH_CREACION: FH_CREACION
+                    NOM_USR: NOM_USR,
+                    CORREO: CORREO ,
+                    CONTRA: CONTRA ,
+                    NOM: NOM ,
+                    AP_PAT: AP_PAT , 
+                    AP_MAT: AP_MAT , 
+                    FH_NACIMIENTO: FH_NACIMIENTO,
+                    FH_CREACION: FH_CREACION
             })
     
             res.json(newUsuarioI)
