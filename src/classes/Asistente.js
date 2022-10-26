@@ -1,7 +1,5 @@
-export class Evento{
-    
+export class Asistente extends State{
     constructor(obj){
-        this.nu_evnt = obj.NU_EVNT;
-        this.no_evnt  = pb
+        super();
     }
 }
