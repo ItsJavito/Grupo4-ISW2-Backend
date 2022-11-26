@@ -100,7 +100,7 @@ export class UsuarioBroker extends RelationalBroker{
                     CO_USR : id
                 }
             })
-            
+
                 usuario.NOM_USR    =  NOM_USR; 
                 usuario.CORREO     =  CORREO;
                 usuario.CONTRA     =  CONTRA;
@@ -262,7 +262,6 @@ export class UsuarioBroker extends RelationalBroker{
                 return res.json(usuario)
             }
             else if(usuarioI){
-                usuario["tipo"] = "invitado"
                 return res.json(usuarioI)
             }else{
                 res.status(400).json({message : "No existe el usuario"})
