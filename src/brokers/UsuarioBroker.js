@@ -43,7 +43,7 @@ export class UsuarioBroker extends RelationalBroker{
             const {id} = req.params;
             const usuario = await this.Usuarios.findOne({
                 where: {
-                    NU_USR : id
+                    CO_USR : id
                 }
             })
             if (!usuario) return res.status(404).json({message : 'No existe Usuario'});
@@ -235,6 +235,7 @@ export class UsuarioBroker extends RelationalBroker{
             return res.status(500).json({message: error.message})
         }
     }
+
     loginUsuario = async (req , res) => { 
         try {
             const correo = req.query.correo;
@@ -258,6 +259,7 @@ export class UsuarioBroker extends RelationalBroker{
                 return res.json(usuario)
             }
             else if(usuarioI){
+                usuario["tipo"] = "invitado"
                 return res.json(usuarioI)
             }else{
                 res.status(400).json({message : "No existe el usuario"})
