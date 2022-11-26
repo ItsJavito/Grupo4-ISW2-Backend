@@ -95,9 +95,12 @@ export class UsuarioBroker extends RelationalBroker{
                 PAIS,
                 RUC }= req.body;
     
-            const usuario = await this.Usuarios.findByPK(id);
+            const usuario = await this.Usuarios.findOne({
+                where: {
+                    CO_USR : id
+                }
+            })
             
-                
                 usuario.NOM_USR    =  NOM_USR; 
                 usuario.CORREO     =  CORREO;
                 usuario.CONTRA     =  CONTRA;
