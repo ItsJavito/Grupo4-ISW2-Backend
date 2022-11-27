@@ -198,7 +198,7 @@ export class EventoBroker extends RelationalBroker{
             const {CO_ESTD} = req.body; 
 
 
-            let eventoUsuario = await this.EventosUsuarios.findOne({
+            let eventoUsuario = await this.UsuariosInvitadoEventos.findOne({
                 where : {
                     CO_USR : co_usr,
                     NU_EVNT : nu_evnt
