@@ -119,7 +119,16 @@ export class ParticipanteEventoBroker extends RelationalBroker{
         try {
             const nu_evnt = req.query.nu_evnt;
             const nu_usr = req.query.nu_usr; 
+            // const {} = req.headers; 
+            const token = req.headers.token;
+            console.log(token);
 
+            if(!token){
+                return res.status(500).json({message: `Necesita token de verificación para leer el QR`})
+            }
+            else if(token !== 'sprint3'){
+                return res.status(500).json({message: `token de verificacion inválido`})
+            }
             //Encuentra el numero de evento con el numero de usuario
             const usrI_evnt = await this.UsuariosInvitadoEventos.findOne({
                 where : {
@@ -141,22 +150,4 @@ export class ParticipanteEventoBroker extends RelationalBroker{
             return res.status(500).json({message : error.message})
         }
     }
-
-    // //se va a utilizar query parameters 
-    // getUsuarioInvitadoEvento = async (req,res) =>{
-        
-    //     const nu_evnt = req.query.nu_evnt;   
-    //     const nu_usr = req.query.nu_usr; 
-
-    //     try {
-    //         const data = await this.usuariosInvitadoEventos.findOne({
-    //             where : {
-    //                 NU_EVNT : nu_evnt, 
-    //                 CO_USR_INVT : 
-    //             }
-    //         })
-    //     } catch (error) {
-    //         return res.status(500).json({message : error.message})
-    //     }
-    // }
 }
