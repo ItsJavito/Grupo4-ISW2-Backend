@@ -69,7 +69,6 @@ export class UsuarioBroker extends RelationalBroker{
             const usuarios = await this.Usuarios.findAll();
             const isUniqueMail = usuarios.find(usuario => usuario.CORREO === CORREO);
             //si es un email unico
-            console.log(isUniqueMail);
             if(!isUniqueMail){
                 const newUsuario = await this.Usuarios.create({
                     
@@ -230,19 +229,25 @@ export class UsuarioBroker extends RelationalBroker{
                 FH_NACIMIENTO,
                 FH_CREACION
             }= req.body;
+            
+            const usuarios = await this.UsuarioInvitado.findAll();
+            const isUniqueMail = usuarios.find(usuario => usuario.CORREO === CORREO);
+            //si es un email unico
+            if(isUniqueMail === undefined){
+                const newUsuarioI = await this.UsuarioInvitado.create({
+                        NOM_USR: NOM_USR,
+                        CORREO: CORREO ,
+                        CONTRA: CONTRA ,
+                        NOM: NOM ,
+                        AP_PAT: AP_PAT , 
+                        AP_MAT: AP_MAT , 
+                        FH_NACIMIENTO: FH_NACIMIENTO,
+                        FH_CREACION: FH_CREACION
+                })
+                return res.status(200).json(newUsuarioI)
+            }
+            return res.status(500).json({message : "Ya existe usuario con ese correo"})
     
-            const newUsuarioI = await this.UsuarioInvitado.create({
-                    NOM_USR: NOM_USR,
-                    CORREO: CORREO ,
-                    CONTRA: CONTRA ,
-                    NOM: NOM ,
-                    AP_PAT: AP_PAT , 
-                    AP_MAT: AP_MAT , 
-                    FH_NACIMIENTO: FH_NACIMIENTO,
-                    FH_CREACION: FH_CREACION
-            })
-    
-            res.json(newUsuarioI)
         }catch (error) {
             return res.status(500).json({message: error.message})
         }
