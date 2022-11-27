@@ -190,6 +190,8 @@ export class UsuarioBroker extends RelationalBroker{
                 FH_NACIMIENTO,
                 FH_CREACION
             }= req.body;
+            
+            console.log(req.body);
             const usuarioI= await this.UsuarioInvitado.findByPk(id);
     
             usuarioI.NOM_USR = NOM_USR;
