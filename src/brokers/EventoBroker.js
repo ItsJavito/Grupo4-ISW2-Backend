@@ -132,6 +132,48 @@ export class EventoBroker extends RelationalBroker{
             return res.status(500).json({message : error.message});
         }
     }
+
+    createEventoxUser = async(req, res) => {
+        try {
+            const {nu_usr} = req.params; 
+
+            const {
+                NO_EVNT, 
+                QT_PERS, 
+                QT_HRS, 
+                DESC_EVENT, 
+                UBIC, 
+                FH_INICIO, 
+                FH_FIN,
+                URL_EVNT,
+                URL_FOTO,
+                FG_VIG} = req.body;
+
+            const newEvento = await this.Eventos.create({
+                NO_EVNT    : NO_EVNT,
+                QT_PERS    : QT_PERS,
+                QT_HRS     : QT_HRS,
+                DESC_EVENT : DESC_EVENT,
+                UBIC       : UBIC,
+                FH_INICIO  : FH_INICIO,
+                FH_FIN     : FH_FIN,
+                URL_EVNT   : URL_EVNT,
+                FG_VIG     : FG_VIG,
+                URL_FOTO   : URL_FOTO
+            })
+            
+            const newEventoUsuario = await this.EventosUsuarios.create({
+                CO_USR      : nu_usr,
+                NU_EVNT     : newEvento.NU_EVNT
+            })
+            return res.status(200).json({newEvento, newEventoUsuario});
+
+        } catch (error) {
+            return res.status(500).json({message : error.message})
+        }
+    }
+
+
     createEventoUsuario = async (req, res) => {
         try {
             const {

@@ -11,6 +11,7 @@ const route = "/eventos"
 router.get( route, eventoBroker.getAllEventos);
 router.get(`${route}/:id` , eventoBroker.getEvento);
 router.post(route, eventoBroker.createEvento);
+router.post(`${route}/usuarios/:nu_usr`, eventoBroker.createEventoxUser);
 router.put(`${route}/:id`, eventoBroker.updateEvento);
 router.delete(`${route}/:id`, eventoBroker.deleteEvento);
 
