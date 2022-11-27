@@ -200,7 +200,7 @@ export class EventoBroker extends RelationalBroker{
 
             let eventoUsuario = await this.UsuariosInvitadoEventos.findOne({
                 where : {
-                    CO_USR : co_usr,
+                    CO_USR_INVT : co_usr,
                     NU_EVNT : nu_evnt
                 }
             })
