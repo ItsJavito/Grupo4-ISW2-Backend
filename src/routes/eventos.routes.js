@@ -22,6 +22,7 @@ router.get("/participantes", participanteBroker.getAllEventosParticipantes);
 router.get(`/participantes/:id`, participanteBroker.getEventosParticipantes) // co_evnt 
 router.post("/participantes" , participanteBroker.createEventosParticipantes)
 router.put("/participantes" , eventoBroker.updateEventoParticipante);
+router.delete("/participante" , eventoBroker.deleteEventoParticipante);
 
 router.post("/estados" , participanteBroker.createEstadosUsuarios)
 router.get("/estados" , participanteBroker.getEstadosUsuarios)

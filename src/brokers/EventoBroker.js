@@ -214,6 +214,26 @@ export class EventoBroker extends RelationalBroker{
         }
     }
 
+    deleteEventoParticipante = async(req, res) =>{
+        try {
+            let co_usr = req.query.co_usr;
+            let nu_evnt = req.query.nu_evnt;
+    
+            await this.UsuariosInvitadoEventos.destroy({
+                    where : {
+                        CO_USR_INVT : co_usr,
+                        NU_EVNT : nu_evnt
+                    }
+                }
+            )
+            res.json({message : "Se ha eliminado el participante"})
+            
+        } catch (error) {
+            res.json({message : error.message})
+        }
+
+    }
+
 
     // !PUT
     updateEvento = async (req,res) => {
