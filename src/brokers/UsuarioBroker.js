@@ -122,7 +122,7 @@ export class UsuarioBroker extends RelationalBroker{
             const {id} = req.params;
             await this.Usuarios.destroy({
                 where: {
-                    NU_USR : id
+                    CO_USR : id
                 }
             });
             res.status(200).json({message: "Usuario eliminado"});
