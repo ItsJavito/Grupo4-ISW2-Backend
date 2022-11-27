@@ -202,7 +202,7 @@ export class UsuarioBroker extends RelationalBroker{
             usuarioI.FH_CREACION = FH_CREACION;
         
             await usuarioI.save();
-            res.json({message: "Usuario invitado actualizado"});
+            return res.status(200).json(usuarioI);
         }catch (error){
             return res.status(500).json({message: error.message});
         }
