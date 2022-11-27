@@ -206,7 +206,7 @@ export class EventoBroker extends RelationalBroker{
             })
 
             eventoUsuario.CO_ESTD = CO_ESTD;
-            eventoUsuario.save();
+            await eventoUsuario.save();
 
             return res.status(200).json(eventoUsuario)
         } catch (error) {
