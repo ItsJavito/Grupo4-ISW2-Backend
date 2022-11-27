@@ -65,18 +65,24 @@ export class UsuarioBroker extends RelationalBroker{
                 FH_CREACION,
                 PAIS,
                 RUC}= req.body;
-    
-            const newUsuario = await this.Usuarios.create({
-                
-                NOM_USR    :  NOM_USR, 
-                CORREO     :  CORREO,
-                CONTRA     :  CONTRA,
-                NOM        :  NOM, 
-                FH_CREACION:  FH_CREACION,
-                PAIS       :  PAIS,
-                RUC        :  RUC
-            })
-            res.status(200).json(newUsuario);
+
+            const usuarios = await this.Usuarios.findAll();
+            const isUniqueMail = usuarios.find(usuario => usuario === CORREO);
+            //si es un email unico
+            if(isUniqueMail){
+                const newUsuario = await this.Usuarios.create({
+                    
+                    NOM_USR    :  NOM_USR, 
+                    CORREO     :  CORREO,
+                    CONTRA     :  CONTRA,
+                    NOM        :  NOM, 
+                    FH_CREACION:  FH_CREACION,
+                    PAIS       :  PAIS,
+                    RUC        :  RUC
+                })
+                return res.status(200).json(newUsuario);
+            }
+            return res.status(500).json({message : "El usuario con el correo ya existe"})
         } catch (error) {
             return res.status(500).json({message : error.message});
         }
