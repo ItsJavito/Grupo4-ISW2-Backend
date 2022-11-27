@@ -142,7 +142,7 @@ export class EventoBroker extends RelationalBroker{
                 CO_USR      : CO_USR,
                 NU_EVNT     : NU_EVNT
             })
-            res.status(200).json(newEventoUsuario);
+            return res.status(200).json(newEventoUsuario);
         } catch (error) {
             return res.status(500).json({message : error.message});
         }
@@ -179,7 +179,7 @@ export class EventoBroker extends RelationalBroker{
     
             //para guardar las modificaciones al objeto en la base de datos
             await evento.save();
-            res.json({message: "Evento actualizado"});
+            return res.json({message: "Evento actualizado"});
         } catch (error) {
             return res.status(500).json({message: error.message}); 
         }    

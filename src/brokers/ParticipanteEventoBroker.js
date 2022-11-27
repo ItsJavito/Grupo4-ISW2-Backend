@@ -115,5 +115,48 @@ export class ParticipanteEventoBroker extends RelationalBroker{
     }
 
 
+    confirmarQr = async (req , res) => { 
+        try {
+            const nu_evnt = req.query.nu_evnt;
+            const nu_usr = req.query.nu_usr; 
 
+            //Encuentra el numero de evento con el numero de usuario
+            const usrI_evnt = await this.UsuariosInvitadoEventos.findOne({
+                where : {
+                    NU_EVNT : nu_evnt, 
+                    CO_USR_INVT : nu_usr
+                } 
+            })
+            
+            if(usrI_evnt["CO_ESTD"] === 2){
+                usrI_evnt["CO_ESTD"] = 3; 
+                await usrI_evnt.save();
+                return res.status(200).json(usrI_evnt);
+            }
+            else{
+                res.status(500).json({ message : `El estado del participante es estado: ${usrI_evnt.CO_ESTD}, no se puede modificar`})
+            }
+            
+        } catch (error) {
+            return res.status(500).json({message : error.message})
+        }
+    }
+
+    // //se va a utilizar query parameters 
+    // getUsuarioInvitadoEvento = async (req,res) =>{
+        
+    //     const nu_evnt = req.query.nu_evnt;   
+    //     const nu_usr = req.query.nu_usr; 
+
+    //     try {
+    //         const data = await this.usuariosInvitadoEventos.findOne({
+    //             where : {
+    //                 NU_EVNT : nu_evnt, 
+    //                 CO_USR_INVT : 
+    //             }
+    //         })
+    //     } catch (error) {
+    //         return res.status(500).json({message : error.message})
+    //     }
+    // }
 }

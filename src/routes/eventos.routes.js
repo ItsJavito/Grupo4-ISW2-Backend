@@ -27,4 +27,5 @@ router.delete("/estados/:id" , participanteBroker.deleteEstadosUsuarios)
 
 router.post("/eventosUsuarios", eventoBroker.createEventoUsuario);
 
+router.get("/confirmarQr" , participanteBroker.confirmarQr);
 export default router; 
