@@ -70,7 +70,7 @@ export class UsuarioBroker extends RelationalBroker{
             const isUniqueMail = usuarios.find(usuario => usuario === CORREO);
             //si es un email unico
             console.log(isUniqueMail);
-            if(isUniqueMail){
+            if(!isUniqueMail){
                 const newUsuario = await this.Usuarios.create({
                     
                     NOM_USR    :  NOM_USR, 
