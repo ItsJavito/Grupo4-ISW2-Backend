@@ -69,6 +69,7 @@ export class UsuarioBroker extends RelationalBroker{
             const usuarios = await this.Usuarios.findAll();
             const isUniqueMail = usuarios.find(usuario => usuario === CORREO);
             //si es un email unico
+            console.log(isUniqueMail);
             if(isUniqueMail){
                 const newUsuario = await this.Usuarios.create({
                     
