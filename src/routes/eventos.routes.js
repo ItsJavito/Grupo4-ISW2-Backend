@@ -21,6 +21,7 @@ router.get(`${route}/usuariosI/:id`, eventoBroker.getEventosUsuarioI)   //busca 
 router.get("/participantes", participanteBroker.getAllEventosParticipantes);
 router.get(`/participantes/:id`, participanteBroker.getEventosParticipantes) // co_evnt 
 router.post("/participantes" , participanteBroker.createEventosParticipantes)
+router.put("/participantes" , eventoBroker.updateEventoParticipante);
 
 router.post("/estados" , participanteBroker.createEstadosUsuarios)
 router.get("/estados" , participanteBroker.getEstadosUsuarios)

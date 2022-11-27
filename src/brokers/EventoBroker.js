@@ -190,6 +190,31 @@ export class EventoBroker extends RelationalBroker{
         }
     }
     
+    updateEventoParticipante = async (req,res) =>{
+        try {
+            let co_usr = req.query.co_usr;
+            let nu_evnt = req.query.nu_evnt;
+            
+            const {CO_ESTD} = req.body; 
+
+
+            let eventoUsuario = await this.EventosUsuarios.findOne({
+                where : {
+                    CO_USR : co_usr,
+                    NU_EVNT : nu_evnt
+                }
+            })
+
+            eventoUsuario.CO_ESTD = CO_ESTD;
+            eventoUsuario.save();
+
+            return res.status(200).json(eventoUsuario)
+        } catch (error) {
+            return res.status(500).json({message : error.message});
+        }
+    }
+
+
     // !PUT
     updateEvento = async (req,res) => {
         try {
